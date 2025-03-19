@@ -31,7 +31,7 @@ typedef struct s_stack
 
 //Check entry numbers (entry.c)
 int ft_check_args(char **argv);
-int ft_check_split_argv(int *argc, char **argv, char delim);
+char    **ft_check_split_argv(char **argv);
 
 //Create stack and nodes (create.c)
 t_node *ft_create_node(int argv, int index);
@@ -46,8 +46,10 @@ t_node  *ft_get_last_node(t_node *top);
 //utils like free
 void    ft_free_stack(t_stack *stack);
 void    ft_free_node(t_node *node);
+void ft_free_av_and_stack(int argc, char **av, t_stack *stack);
+void    ft_error(void);
 void    ft_free_split(char **split);
 
-
+void    ft_error(void);
 void    ft_print_stacks(t_stack *stack_a);
 #endif

@@ -63,16 +63,11 @@ int ft_check_args(char **argv)
 }
 
 //Comprueba si necesita hacer un split o no;
-int    ft_check_split_argv(int *argc, char **argv, char delim)
+char    **ft_check_split_argv(char **argv)
 {
-    int i;
-
-    if (*argc > 2)
-        return 1;
-    i = 0;
-    argv = ft_split(argv[1], delim);
-    while(argv[i])
-        i++;
-    *argc = i;
-    return 0;
+    char **av;
+    av = ft_split(argv[1], ' ');
+    if (!av)
+        return (NULL);
+    return (av);
 }
