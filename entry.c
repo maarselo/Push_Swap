@@ -17,7 +17,7 @@ static int ft_checkdup(char **argv)
     int i;
     int j;
 
-    i = 1;
+    i = 0;
     while(argv[i])
     {
         j = i + 1;
@@ -63,11 +63,13 @@ int ft_check_args(char **argv)
 }
 
 //Comprueba si necesita hacer un split o no;
-char    **ft_check_split_argv(char **argv)
+char    **ft_check_split_argv(char **argv, int argc)
 {
     char **av;
-    av = ft_split(argv[1], ' ');
-    if (!av)
-        return (NULL);
+
+    if (argc == 2)
+        av = ft_split(argv[1], ' ');
+    else
+        av = ++argv;
     return (av);
 }

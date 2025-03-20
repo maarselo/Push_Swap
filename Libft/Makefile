@@ -30,7 +30,7 @@ BSRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
 BOBJS = $(BSRCS:.c=.o)
 
 
-CC = cc
+CC = cc -g
 CC_LIB = ar -rcs
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf

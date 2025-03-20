@@ -13,19 +13,6 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-t_node *ft_create_node(int argv, int index)
-{
-    t_node *new_node;
-
-    new_node = (t_node *)malloc(sizeof(t_node));
-    if (!new_node)
-        return (NULL);
-    new_node->value = argv;
-    new_node->index = index;
-    new_node->next = NULL;
-    return (new_node);
-}
-
 t_stack *ft_create_stack(void)
 {
     t_stack *new_stack;
@@ -38,44 +25,47 @@ t_stack *ft_create_stack(void)
     return (new_stack);
 }
 
-void ft_add_node_back(t_node **top, t_node *new)
+t_node *ft_create_node(int value)
+{
+    t_node *new_node;
+
+    new_node = (t_node *)malloc(sizeof(t_node));
+    if (!new_node)
+        return (NULL);
+    new_node->value = value;
+    new_node->index = -1;
+    new_node->next = NULL;
+    return (new_node);
+}
+
+void ft_add_to_stack(t_stack *stack, int value) //to back
 {
     t_node  *tmp;
+    t_node  *new;
 
-    if(!new)
+    new = ft_create_node(value);
+    if (!stack)
         return ;
-    if (*top == NULL)
+    if (!stack->top)
+        stack -> top = new;
+    else
     {
-        *top = new;
-        return;
+        tmp = ft_get_last_node(stack->top);
+        tmp->next = new;
+        new->next = NULL;
     }
-    tmp = ft_get_last_node(*top);
-    tmp->next = new;
-    new->next = NULL;
 }
 
-t_stack *ft_fill_first_stack(int argc, char **argv)
+void ft_fill_stack(t_stack *stack_a, char **argv)
 {
     int i;
-    t_stack *stack_a;
 
-    i = 0;
-    stack_a = ft_create_stack();
-    if (!stack_a)
-        return (NULL);
-    stack_a->size = argc - 1;
-    while (++i < argc)
-    {
-        t_node *new_node = ft_create_node(ft_atoi(argv[i]), i);
-        if (!new_node)
-        {
-            ft_free_stack(stack_a);
-            return (NULL);
-        }
-        ft_add_node_back(&(stack_a->top), new_node);
-    }
-    return stack_a;
+    i = -1;
+    while (argv[++i])
+        ft_add_to_stack(stack_a, ft_atoi(argv[i]));
 }
+
+
 
 void    ft_print_stacks(t_stack *stack_a)
 {

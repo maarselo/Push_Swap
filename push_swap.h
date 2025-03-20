@@ -14,6 +14,7 @@
 #define PUSH_SWAP_H
 
 # include "./Libft/libft.h"
+# include <stdio.h>
 
 typedef struct s_node
 {
@@ -31,13 +32,13 @@ typedef struct s_stack
 
 //Check entry numbers (entry.c)
 int ft_check_args(char **argv);
-char    **ft_check_split_argv(char **argv);
+char    **ft_check_split_argv(char **argv, int argc);
 
 //Create stack and nodes (create.c)
-t_node *ft_create_node(int argv, int index);
+t_node *ft_create_node(int value);
 t_stack *ft_create_stack(void);
-void ft_add_node_back(t_node **top, t_node *new);
-t_stack *ft_fill_first_stack(int argc, char **argv);
+void ft_add_to_stack(t_stack *stack, int value);
+void ft_fill_stack(t_stack *stack_a, char **argv);
 
 
 //(get positions.c)
@@ -46,9 +47,8 @@ t_node  *ft_get_last_node(t_node *top);
 //utils like free
 void    ft_free_stack(t_stack *stack);
 void    ft_free_node(t_node *node);
-void ft_free_av_and_stack(int argc, char **av, t_stack *stack);
-void    ft_error(void);
 void    ft_free_split(char **split);
+void ft_free_av_and_stack(int argc, char **av, t_stack *stack);
 
 void    ft_error(void);
 void    ft_print_stacks(t_stack *stack_a);

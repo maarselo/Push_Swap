@@ -15,28 +15,23 @@
 int main(int argc, char **argv)
 {
     int error;
+    t_stack *stack_a;
     char **av;
 
     if (argc < 2)
         return (1);
-    if (argc == 2)
-    {
-        av = ft_check_split_argv(argv);
-    }
-    else
-        av = argv;
+    av = ft_check_split_argv(argv, argc);
 
     error = ft_check_args(av);
     if (error == 1)
-    {
         ft_error();
-        if (argc == 2)
-            ft_free_split(av);
-        return (1);
-    }
-    t_stack *stack_a = ft_fill_first_stack(argc, av);
+
+    stack_a = ft_create_stack();
+    ft_fill_stack(stack_a, av);
 
     ft_print_stacks(stack_a);
+    
     ft_free_av_and_stack(argc, av, stack_a);
+
     return (0);
 }

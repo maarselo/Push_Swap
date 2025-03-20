@@ -19,7 +19,7 @@ OBJS = $(SRCS:.c=.o)
 LIBFT_DIR=./Libft
 LIBFT=$(LIBFT_DIR)/libft.a
 
-CC = cc
+CC = cc -g
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
@@ -30,7 +30,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR) bonus
 
 $(NAME): $(OBJS) $(LIBFT) $(HEADER) Makefile
-	$(CC) -g $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 clean :
 	make -C $(LIBFT_DIR) clean
