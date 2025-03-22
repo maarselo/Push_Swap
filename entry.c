@@ -38,6 +38,8 @@ static int   ft_checkdigit(char *c)
         return (1);
     if (*c == '-' || *c == '+')
         c++;
+    if (!*c)
+        return (1);
     while (*c)
     {
         if (!ft_isdigit(*c))

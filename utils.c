@@ -53,3 +53,4 @@ void ft_free_av_and_stack(int argc, char **av, t_stack *stack)
         ft_free_split(av);
     ft_free_stack(stack);
 }
+

@@ -13,7 +13,7 @@
 NAME = push_swap
 
 HEADER = push_swap.h
-SRCS = main.c entry.c create.c get_positions.c utils.c print_error.c
+SRCS = main.c entry.c create.c get_positions.c utils.c print_error.c movements.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR=./Libft

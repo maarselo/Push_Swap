@@ -23,11 +23,11 @@ typedef struct s_node
     struct s_node *next;
 } t_node;
 
-typedef struct s_stack 
+typedef struct s_stack
 {
     int size;
     t_node *top;
-    //t_node *bottom;
+    t_node *bottom;
 } t_stack;
 
 //Check entry numbers (entry.c)
@@ -49,6 +49,15 @@ void    ft_free_stack(t_stack *stack);
 void    ft_free_node(t_node *node);
 void    ft_free_split(char **split);
 void ft_free_av_and_stack(int argc, char **av, t_stack *stack);
+
+//movements
+void    ft_swap(t_stack *stack);
+void    ft_ss(t_stack *stack_a, t_stack *stack_b);
+void    ft_push(t_stack *stack_src, t_stack *stack_dst);
+void    ft_rotate(t_stack *stack);
+void    ft_rr(t_stack *stack_a, t_stack *stack_b);
+void    ft_reverse(t_stack *stack);
+void    ft_rrr(t_stack *stack_a, t_stack *stack_b);
 
 void    ft_error(void);
 void    ft_print_stacks(t_stack *stack_a);

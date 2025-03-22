@@ -22,6 +22,7 @@ t_stack *ft_create_stack(void)
         return (NULL);
     new_stack->size = 0;
     new_stack->top = NULL;
+    new_stack->bottom = NULL;
     return (new_stack);
 }
 
@@ -51,6 +52,7 @@ void ft_add_to_stack(t_stack *stack, int value) //to back
     else
     {
         tmp = ft_get_last_node(stack->top);
+        stack->bottom = new;
         tmp->next = new;
         new->next = NULL;
     }
@@ -62,10 +64,11 @@ void ft_fill_stack(t_stack *stack_a, char **argv)
 
     i = -1;
     while (argv[++i])
+    {
         ft_add_to_stack(stack_a, ft_atoi(argv[i]));
+        stack_a->size++;
+    }
 }
-
-
 
 void    ft_print_stacks(t_stack *stack_a)
 {
