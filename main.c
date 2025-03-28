@@ -33,54 +33,15 @@ int main(int argc, char **argv)
 
     ft_fill_stack(stack_a, av);
 
+    if (ft_checksorted(stack_a))
+    {
+        ft_put_correct_index(stack_a);
+        ft_sort(stack_a, stack_b);
+    }
+
+    printf("\nOrdenado:\n");
     ft_print_stacks(stack_a);
 
-    printf ("swap:\n");
-    ft_swap(stack_a);
-    ft_print_stacks(stack_a);
-
-    printf("\npush:\n");
-    ft_push(stack_a, stack_b);
-    printf("\ta:\n");
-    ft_print_stacks(stack_a);
-    printf("\tb:\n");
-    ft_print_stacks(stack_b);
-
-    printf("\nrotate:\n");
-    ft_rotate(stack_a);
-    ft_print_stacks(stack_a);
-
-    printf("reverse:\n");
-    ft_reverse(stack_a);
-    ft_print_stacks(stack_a);
-
-    printf("\npush:\n");
-    ft_push(stack_a, stack_b);
-    printf("\ta:\n");
-    ft_print_stacks(stack_a);
-    printf("\tb:\n");
-    ft_print_stacks(stack_b);
-
-    printf("\ndoble swap ss:\n");
-    ft_ss(stack_a, stack_b);
-    printf("\ta:\n");
-    ft_print_stacks(stack_a);
-    printf("\tb:\n");
-    ft_print_stacks(stack_b);
-
-    printf("\ndoble rotate rr:\n");
-    ft_rr(stack_a, stack_b);
-    printf("\ta:\n");
-    ft_print_stacks(stack_a);
-    printf("\tb:\n");
-    ft_print_stacks(stack_b);
-    
-    printf("\ndoble reverse rrr:\n");
-    ft_rrr(stack_a, stack_b);
-    printf("\ta:\n");
-    ft_print_stacks(stack_a);
-    printf("\tb:\n");
-    ft_print_stacks(stack_b);
 
     ft_free_av_and_stack(argc, av, stack_a);//add, other stack argv
     ft_free_stack(stack_b);

@@ -22,7 +22,6 @@ t_stack *ft_create_stack(void)
         return (NULL);
     new_stack->size = 0;
     new_stack->top = NULL;
-    new_stack->bottom = NULL;
     return (new_stack);
 }
 
@@ -52,7 +51,6 @@ void ft_add_to_stack(t_stack *stack, int value) //to back
     else
     {
         tmp = ft_get_last_node(stack->top);
-        stack->bottom = new;
         tmp->next = new;
         new->next = NULL;
     }

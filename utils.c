@@ -11,6 +11,92 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+//to get min
+t_node *ft_min(t_stack *stack_a)
+{
+    t_node  *num;
+    t_node  *min;
+
+    num = stack_a->top;
+    min = num;
+    while (num)
+    {
+        if (min->value > num->value)
+            min = num;
+        num = num->next;
+    }
+    return (min);
+}
+
+t_node *ft_max(t_stack *stack_a)
+{
+    t_node  *num;
+    t_node  *max;
+
+    num = stack_a->top;
+    max = num;
+    while (num)
+    {
+        if (max->value < num->value)
+            max = num;
+        num = num->next;
+    }
+    return (max);
+}
+
+int ft_get_index(t_stack *stack_a, t_node *node_to_find)
+{
+    t_node *tmp;
+
+    tmp = stack_a->top;
+    while (tmp)
+    {
+        if (tmp->value == node_to_find->value)
+            return (tmp->index);
+        tmp = tmp->next;
+    }
+    return (0);
+}
+
+int ft_getpos(t_node *node, t_stack *stack)
+{
+    int i;
+    t_node *tmp;
+
+    i = 0;
+    tmp = stack->top;
+    while (tmp)
+    {
+        if (tmp == node)
+            return (i);
+        i++;
+        tmp = tmp->next;
+    }
+    return (0);
+}
+//to put correct index in order
+void    ft_put_correct_index(t_stack *stack_a)
+{
+    t_node *current;
+    t_node *compare;
+    int index;
+
+    //if (!stack_a || !stack_a->top)
+    current = stack_a ->top;
+    while (current)
+    {
+        index = 0;
+        compare = stack_a->top;
+        while (compare)
+        {
+            if (current->value > compare->value)
+                index++;
+            compare = compare->next;
+        }
+        current->index = index;
+        current = current->next;
+    }
+}
 
 //Free para cuando reciba el argumento entre comillas
 void    ft_free_split(char **split)

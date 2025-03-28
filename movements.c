@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void    ft_swap(t_stack *stack)
+void    ft_swap(t_stack *stack, char c)
 {
     t_node *tmp1;
     t_node *tmp2;
@@ -24,15 +24,20 @@ void    ft_swap(t_stack *stack)
     stack->top = stack->top->next;
     stack->top->next = tmp1;
     stack->top->next->next = tmp2;
+    if (c == 'a')
+        ft_putstr_fd("sa\n",1);
+    else if (c == 'b')
+        ft_putstr_fd("sb\n",1);
 }
 
 void    ft_ss(t_stack *stack_a, t_stack *stack_b) //////////
 {
-    ft_swap(stack_a);
-    ft_swap(stack_b);
+    ft_swap(stack_a, '\0');
+    ft_swap(stack_b, '\0');
+    ft_putstr_fd("ss\n", 1);
 }
 
-void    ft_push(t_stack *stack_src, t_stack *stack_dst)
+void    ft_push(t_stack *stack_src, t_stack *stack_dst, char c)
 {
     t_node  *tmp;
     t_node  *old_top;
@@ -48,10 +53,14 @@ void    ft_push(t_stack *stack_src, t_stack *stack_dst)
     stack_dst->top->next = tmp;
     stack_dst->size++;
     stack_src->size--;
+    if (c == 'a')
+        ft_putstr_fd("pa\n",1);
+    else if (c == 'b')
+        ft_putstr_fd("pb\n",1);
 }
 
 
-void    ft_rotate(t_stack *stack)
+void    ft_rotate(t_stack *stack, char c)
 {
     t_node *tmp;
     t_node  *new_last;
@@ -65,43 +74,46 @@ void    ft_rotate(t_stack *stack)
     tmp->next =NULL;
     new_last = ft_get_last_node(stack->top);
     new_last->next = tmp;
-    stack->bottom = tmp;
-
-    //stack->top = stack->bottom;
-    //stack->top->next = tmp->next;
-    //new_last->next = tmp;
-    //tmp->next = NULL;
+    if (c == 'a')
+        ft_putstr_fd("ra\n",1);
+    else if (c == 'b')
+        ft_putstr_fd("rb\n",1);
 }
 
 void    ft_rr(t_stack *stack_a, t_stack *stack_b)
 {
-    ft_rotate(stack_a);
-    ft_rotate(stack_b);
+    ft_rotate(stack_a, '\0');
+    ft_rotate(stack_b, '\0');
+    ft_putstr_fd("rr\n",1);
 }
 
-void    ft_reverse(t_stack *stack)
+void    ft_reverse(t_stack *stack, char c)
 {
 
-    t_node *primero;
-    t_node *anterior;
+    t_node *botnum;
+    t_node *tmp;
 
     if (!stack->top || !stack->top->next)
         return;
-
-    primero = stack->top;
-    while (primero->next)
+    botnum = stack->top;
+    while (botnum->next)
     {
-        anterior = primero;
-        primero = primero->next;
+        tmp = botnum;
+        botnum = botnum->next;
     }
-    anterior->next = NULL;
-    stack->bottom->next = stack->top;
-    stack->top = stack->bottom;
-    stack->bottom = anterior;
+    if (tmp)
+        tmp->next = NULL;
+    botnum->next = stack->top;
+    stack->top = botnum;
+    if (c == 'a')
+        ft_putstr_fd("rra\n",1);
+    else if (c== 'b')
+        ft_putstr_fd("rrb\n",1);
 }
 
 void    ft_rrr(t_stack *stack_a, t_stack *stack_b)
 {
-    ft_reverse(stack_a);
-    ft_reverse(stack_b);
+    ft_reverse(stack_a, '\0');
+    ft_reverse(stack_b, '\0');
+    ft_putstr_fd("rrr\n",1);
 }
