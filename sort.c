@@ -96,6 +96,6 @@ void    ft_sort(t_stack *stack_a, t_stack *stack_b)
         ft_sorted_four(stack_a, stack_b);
     else if (stack_a->size == 5)
         ft_sorted_five(stack_a,stack_b);
-    else
+    else 
         ft_sorted_more(stack_a, stack_b);
 }

@@ -75,6 +75,13 @@ void ft_sorted_five(t_stack *stack_a, t_stack *stack_b);
 void    ft_put_stack_b(t_stack *stack_a, t_stack *stack_b);
 void    ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
 
+
+void ft_move_back_to_stack_a(t_stack *stack_a, t_stack *stack_b);
+void ft_move_to_stack_b(t_stack *stack_a, t_stack *stack_b, t_node *node);
+t_node *ft_find_cheapest_node(t_stack *stack_a, t_stack *stack_b);
+int ft_calculate_cost(t_stack *stack_a, t_stack *stack_b, t_node *node);
+void ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
+
 void    ft_error(void);
 void    ft_print_stacks(t_stack *stack_a);
 #endif
