@@ -39,8 +39,8 @@ int main(int argc, char **argv)
         ft_sort(stack_a, stack_b);
     }
 
-    printf("\nOrdenado:\n");
-    ft_print_stacks(stack_a);
+    //printf("\nOrdenado:\n");
+    //ft_print_stacks(stack_a);
 
 
     ft_free_av_and_stack(argc, av, stack_a);//add, other stack argv

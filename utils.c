@@ -44,6 +44,22 @@ t_node *ft_max(t_stack *stack_a)
     return (max);
 }
 
+t_node *ft_get_prev(t_node *node, t_stack *stack)
+{
+    t_node *tmp;
+
+    tmp = stack->top;
+    if (tmp == node)
+        return (NULL);
+    while (tmp)
+    {
+        if (tmp->next == node)
+            return (tmp);
+        tmp = tmp->next;
+    }
+    return (NULL);
+}
+
 int ft_get_index(t_stack *stack_a, t_node *node_to_find)
 {
     t_node *tmp;
@@ -67,9 +83,9 @@ int ft_getpos(t_node *node, t_stack *stack)
     tmp = stack->top;
     while (tmp)
     {
+        i++;
         if (tmp == node)
             return (i);
-        i++;
         tmp = tmp->next;
     }
     return (0);

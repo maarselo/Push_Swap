@@ -48,6 +48,7 @@ t_node *ft_min(t_stack *stack_a);
 t_node *ft_max(t_stack *stack_a);
 //utils like correct index
 int ft_getpos(t_node *node, t_stack *stack);
+t_node *ft_get_prev(t_node *node, t_stack *stack);
 int ft_get_index(t_stack *stack_a, t_node *node_to_find);
 void    ft_put_correct_index(t_stack *stack_a);
 //utils like free
@@ -72,15 +73,13 @@ void    ft_sort(t_stack *stack_a, t_stack *stack_b);
 void    ft_sorted_three(t_stack *stack_a);
 void    ft_sorted_four(t_stack *stack_a, t_stack *stack_b);
 void ft_sorted_five(t_stack *stack_a, t_stack *stack_b);
+
+int ft_calculate_costa(t_stack *stack_a, t_node *node);
+int ft_calculate_costb(t_stack *stack_b, t_node *node);
 void    ft_put_stack_b(t_stack *stack_a, t_stack *stack_b);
 void    ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
 
-
-void ft_move_back_to_stack_a(t_stack *stack_a, t_stack *stack_b);
-void ft_move_to_stack_b(t_stack *stack_a, t_stack *stack_b, t_node *node);
-t_node *ft_find_cheapest_node(t_stack *stack_a, t_stack *stack_b);
 int ft_calculate_cost(t_stack *stack_a, t_stack *stack_b, t_node *node);
-void ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
 
 void    ft_error(void);
 void    ft_print_stacks(t_stack *stack_a);
