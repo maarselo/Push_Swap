@@ -43,7 +43,7 @@ int ft_calculate_costb(t_stack *stack_b, t_node *node) //cambiar el orden
     t_node  *min;
     t_node  *tmp;
 
-    cost_b = 0; //To push to b
+    cost_b = 0;
     max = ft_max(stack_b);
     min = ft_min(stack_b);
     if ((node->index > max->index) || (node->index < min->index))
@@ -65,14 +65,11 @@ int ft_calculate_costb(t_stack *stack_b, t_node *node) //cambiar el orden
                 min = tmp;
             tmp = tmp->next;
         }
-        //printf("menor:%d", min->value);
-        if (ft_getpos(min,stack_b) > ft_check_size(stack_b)) {
+        if (ft_getpos(min,stack_b) > ft_check_size(stack_b)) 
             cost_b = stack_b->size - ft_getpos(min,stack_b) + 1;
-            //printf("youuu");
-        }
-        else {
+        else
             cost_b = ft_getpos(min,stack_b) - 1;
-        }
+        
     }
     return (cost_b);
 }
@@ -100,6 +97,36 @@ t_node *ft_find_cheapest_node(t_stack *stack_a, t_stack *stack_b )
     return (cheapest);
 }
 
+t_node    *ft_get_node_who_i_need_move(t_node *cheapest,t_stack *stack_b)
+{
+    t_node *tmp;
+    t_node *min;
+    t_node *max;
+
+    tmp = stack_b->top;
+    min = NULL; //like min prev
+    while (tmp)
+    {           
+        if ((tmp->value < cheapest->value) && (!min || ft_abs(tmp->index - cheapest->index) < ft_abs(min->index - cheapest->index)))
+        {
+            min = tmp;
+        }
+        tmp = tmp->next;
+    }
+    if (!min)
+    {
+        tmp = stack_b->top;
+        max = ft_max(stack_b);
+        while (tmp)
+        {
+            if (tmp == max)
+                return(tmp);
+            tmp = tmp->next;
+        }
+    }
+    return(min);
+}
+
 void    ft_push_to_stackb(t_stack *stack_a, t_stack *stack_b, t_node *cheapest)
 {
     int cost_a;
@@ -107,18 +134,17 @@ void    ft_push_to_stackb(t_stack *stack_a, t_stack *stack_b, t_node *cheapest)
 
     cost_a = ft_calculate_costa(stack_a, cheapest);
     cost_b = ft_calculate_costb(stack_b, cheapest);
-
     while (cost_a > 0 && cost_b > 0)
     {
-        if ((ft_getpos(cheapest, stack_a) <= ft_check_size(stack_a)) && (cost_b <= ft_check_size(stack_b)))
+        if ((ft_getpos(cheapest, stack_a) > ft_check_size(stack_a)) && (ft_getpos(ft_get_node_who_i_need_move(cheapest,stack_b),stack_b) > ft_check_size(stack_b)))
         {
-            ft_rr(stack_a, stack_b);
+            ft_rrr(stack_a, stack_b);
             cost_a--;
             cost_b--;
         }
-        else if ((ft_getpos(cheapest, stack_a) > ft_check_size(stack_a)) && (cost_b > ft_check_size(stack_b)))
+        else if ((ft_getpos(cheapest, stack_a) <= ft_check_size(stack_a)) && (ft_getpos(ft_get_node_who_i_need_move(cheapest,stack_b),stack_b) <= ft_check_size(stack_b)))
         {
-            ft_rrr(stack_a, stack_b);
+            ft_rr(stack_a, stack_b);
             cost_a--;
             cost_b--;
         }
@@ -127,18 +153,18 @@ void    ft_push_to_stackb(t_stack *stack_a, t_stack *stack_b, t_node *cheapest)
     }
     while (cost_a > 0)
     {
-        if (ft_getpos(cheapest, stack_a) <= ft_check_size(stack_a))
-            ft_rotate(stack_a, 'a');
-        else
+        if (ft_getpos(cheapest, stack_a) > ft_check_size(stack_a))
             ft_reverse(stack_a, 'a');
+        else
+            ft_rotate(stack_a, 'a');
         cost_a--;
     }
     while (cost_b > 0)
     {
-        if (cost_b <= ft_check_size(stack_b))
-            ft_rotate(stack_b, 'b');
-        else
+        if (ft_getpos(ft_get_node_who_i_need_move(cheapest,stack_b),stack_b) > ft_check_size(stack_b))
             ft_reverse(stack_b, 'b');
+        else
+            ft_rotate(stack_b, 'b');
         cost_b--;
     }
     ft_push(stack_a, stack_b, 'b');
@@ -158,51 +184,24 @@ void    ft_rotate_b_to_pusha_a(t_stack *stack_b)
     }
 }
 
-void    ft_printfvalue(t_stack *stack_a, t_stack *stack_b)
-{
-    t_node *tmp = stack_a->top;
-    while(tmp)
-    {
-        printf("Numer: %d Coste a: %d Costeb: %d + 1\n", tmp->value, ft_calculate_costa(stack_a, tmp), ft_calculate_costb(stack_b, tmp));
-        ft_print_stacks(stack_b);
-        //ft_push(stack_a, stack_b, '\0');
-        tmp = tmp->next;
-    }
-}
-
 void    ft_sorted_more(t_stack *stack_a, t_stack *stack_b)
 {
-    t_node  *cheapest;
-
-    ft_push(stack_a, stack_b, 'b');
-    ft_push(stack_a, stack_b, 'b');
-    while(stack_a->size > 0)
+    ft_push(stack_a, stack_b, 'a');
+    ft_push(stack_a, stack_b, 'a');
+    while (stack_a->size != 0)
     {
-        cheapest = ft_find_cheapest_node(stack_a, stack_b);
+        t_node *cheapest = ft_find_cheapest_node(stack_a, stack_b); //printf("\numero mas barato: %d\n", cheapest->value); printf("costea: %d\n", ft_calculate_costa(stack_a, cheapest));printf("costeb: %d\n", ft_calculate_costb(stack_b, cheapest)); //testear y imprimir costeb
         ft_push_to_stackb(stack_a, stack_b, cheapest);
     }
-    ft_print_stacks(stack_b);
-/*
-    ft_push(stack_a, stack_b, 'b');
-    ft_push(stack_a, stack_b, 'b');
-    ft_printfvalue(stack_a, stack_b);
-    //ft_print_stacks(stack_b)
-;*/
-}
+    ft_rotate_b_to_pusha_a(stack_b);
 
-/*
-void    ft_sorted_more(t_stack *stack_a, t_stack *stack_b)
-{
-    ft_push(stack_a, stack_b, 'b');
-    ft_push(stack_a, stack_b, 'b');
-    while (stack_a->size > 3)
-    {
-        t_node *cheapest_node = ft_find_cheapest_node(stack_a, stack_b);
-        ft_put_stack_b(stack_a, stack_b, cheapest_node);
-    }
-    ft_sorted_three(stack_a);
+    while (stack_b->size != 0)
+        ft_push(stack_b,stack_a, 'b');
 
-    // Mueve los números de vuelta a stack_a
-    ft_move_back_to_stack_a(stack_a, stack_b);
+    //ft_print_stacks(stack_a);
+    //if (ft_checksorted(stack_a))
+      //  ft_putstr_fd("No esta ordenado.",1);
+    //else if (!ft_checksorted(stack_a))
+    //ft_putstr_fd("Esta ordenado.",1);
+
 }
-*/
