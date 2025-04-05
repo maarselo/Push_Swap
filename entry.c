@@ -45,12 +45,10 @@ static int	ft_checkdup(char **argv)
 
 static int	ft_checkdigit(char *c)
 {
-	if (!c)
+	if (!c || !*c)
 		return (1);
 	if (*c == '-' || *c == '+')
 		c++;
-	if (!*c)
-		return (1);
 	while (*c)
 	{
 		if (!ft_isdigit(*c))
@@ -64,7 +62,7 @@ int	ft_check_args(char **argv)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (ft_checkdup(argv))
 		return (1);
 	while (argv[i])
