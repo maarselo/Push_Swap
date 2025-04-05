@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-t_node	*ft_min(t_stack *stack_a)
+t_node	*ft_min(t_stack *stack)
 {
 	t_node	*num;
 	t_node	*min;
 
-	num = stack_a->top;
+	num = stack->top;
 	min = num;
 	while (num)
 	{
@@ -28,12 +28,12 @@ t_node	*ft_min(t_stack *stack_a)
 	return (min);
 }
 
-t_node	*ft_max(t_stack *stack_a)
+t_node	*ft_max(t_stack *stack)
 {
 	t_node	*num;
 	t_node	*max;
 
-	num = stack_a->top;
+	num = stack->top;
 	max = num;
 	while (num)
 	{
