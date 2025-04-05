@@ -72,7 +72,7 @@ t_node	*ft_get_prev(t_node *node, t_stack *stack)
 	return (NULL);
 }
 
-int	ft_get_position(t_node *node, t_stack *stack)
+int	ft_position(t_node *node, t_stack *stack)
 {
 	t_node	*tmp;
 	int		i;
