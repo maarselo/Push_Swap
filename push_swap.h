@@ -14,7 +14,6 @@
 #define PUSH_SWAP_H
 
 # include "./Libft/libft.h"
-# include <stdio.h>
 
 typedef struct s_node
 {
@@ -29,57 +28,55 @@ typedef struct s_stack
     t_node *top;
 } t_stack;
 
-//Check entry numbers (entry.c)
+//Check entry if its in " " or duplicate or if is digit ENTRY.c
 int ft_check_args(char **argv);
-char    **ft_check_split_argv(char **argv, int argc);
+char    **ft_check_split(char **argv, int argc);
 
-//Create stack and nodes (create.c)
-t_node *ft_create_node(int value);
+//Create.c: Create stacks, nodes, ...
 t_stack *ft_create_stack(void);
-void ft_add_to_stack(t_stack *stack, int value);
-void ft_fill_stack(t_stack *stack_a, char **argv);
+void ft_fill_stack(t_stack *stack_a, char **argv); //contain create node, and add to stack back
 
+//About get nodes for positions or position
+t_node *ft_min(t_stack *stack);
+t_node *ft_max(t_stack *stack);
+t_node  *ft_get_prev(t_node *node, t_stack *stack);
+t_node   *ft_get_last_node(t_node *top);
+t_node    *ft_get_node_prev(t_node *cheapest,t_stack *stack_b);
+int     ft_position(t_node *node, t_stack *stack);
 
-//(get positions.c)
-t_node  *ft_get_last_node(t_node *top);
-
-//To get min or max
-t_node *ft_min(t_stack *stack_a);
-t_node *ft_max(t_stack *stack_a);
-//utils like correct index
-int ft_getpos(t_node *node, t_stack *stack);
-t_node *ft_get_prev(t_node *node, t_stack *stack);
-int ft_get_index(t_stack *stack_a, t_node *node_to_find);
-void    ft_put_correct_index(t_stack *stack_a);
-//utils like free
-void    ft_free_stack(t_stack *stack);
-void    ft_free_node(t_node *node);
-void    ft_free_split(char **split);
-void ft_free_av_and_stack(int argc, char **av, t_stack *stack);
-
-//movements
+//Movemnet in puushswap
 void    ft_swap(t_stack *stack, char c);
-void    ft_ss(t_stack *stack_a, t_stack *stack_b);
 void    ft_push(t_stack *stack_src, t_stack *stack_dst, char c);
 void    ft_rotate(t_stack *stack, char c);
 void    ft_rr(t_stack *stack_a, t_stack *stack_b);
 void    ft_reverse(t_stack *stack, char c);
 void    ft_rrr(t_stack *stack_a, t_stack *stack_b);
 
-//algorythm
-int     ft_checksorted(t_stack *stack_a);
-void    ft_sort(t_stack *stack_a, t_stack *stack_b);
-//To sort 3 numbers
-void    ft_sorted_three(t_stack *stack_a);
-void    ft_sorted_four(t_stack *stack_a, t_stack *stack_b);
-void ft_sorted_five(t_stack *stack_a, t_stack *stack_b);
+//rotates befores push to more number
+void    ft_both_rot(t_stack *sta, t_stack *stb, t_node *cheap, int *a, int *b);
+void	ft_rotate_stack_a(t_stack *a, t_node *cheapest, int cost_a);
+void	ft_rotate_stack_b(t_stack *b, t_node *cheapest, int cost_b);
 
-int ft_calculate_costa(t_stack *stack_a, t_node *node);
-int ft_calculate_costb(t_stack *stack_b, t_node *node);
-void    ft_put_stack_b(t_stack *stack_a, t_stack *stack_b);
+//for sort list
+void    ft_sort(t_stack *stack_a, t_stack *stack_b);
 void    ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
 
+//Utils like
+int     ft_check_sorted(t_stack *stack_a);
+void    ft_move_min_to_top(t_stack *stack, char stack_name);
+void    ft_put_correct_index(t_stack *stack_a);
 
+//utilss Math operations utils
+int   ft_abs(int num);
+int ft_check_size(t_stack *stack);
+int ft_costa(t_node *node, t_stack *stack_a);
+int ft_costb( t_node *node, t_stack *stack_b);
+
+//print error
 void    ft_error(void);
+//free for all
+void ft_free(int argc, char **numbers, t_stack *stack_a, t_stack *stack_b);
+
+
 void    ft_print_stacks(t_stack *stack_a);
 #endif

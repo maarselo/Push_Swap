@@ -15,36 +15,27 @@
 int main(int argc, char **argv)
 {
     int error;
+    char **numbers;
     t_stack *stack_a;
     t_stack *stack_b;
 
-    char **av;
-
     if (argc < 2)
         return (1);
-    av = ft_check_split_argv(argv, argc);
+    numbers = ft_check_split(argv, argc);
 
-    error = ft_check_args(av);
-    if (error == 1)
+    error = ft_check_args(numbers);
+    if (error)
         ft_error();
-
+    
     stack_a = ft_create_stack();
     stack_b = ft_create_stack();
 
-    ft_fill_stack(stack_a, av);
-
-    if (ft_checksorted(stack_a))
+    ft_fill_stack(stack_a, numbers);
+    if (ft_check_sorted(stack_a))
     {
         ft_put_correct_index(stack_a);
         ft_sort(stack_a, stack_b);
     }
-
-    //printf("\nOrdenado:\n");
-    //ft_print_stacks(stack_a);
-
-
-    ft_free_av_and_stack(argc, av, stack_a);//add, other stack argv
-    ft_free_stack(stack_b);
-
+    ft_free(argc, numbers, stack_a, stack_b);
     return (0);
 }
