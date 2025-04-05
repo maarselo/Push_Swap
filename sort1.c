@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_sorted_three(t_stack *stack)
+static void	ft_sorted_three(t_stack *stack)
 {
 	if (!ft_check_sorted((stack)))
 		return ;
@@ -36,7 +36,7 @@ void	ft_sorted_three(t_stack *stack)
 	}
 }
 
-void	ft_sorted_four(t_stack *stack_a, t_stack *stack_b)
+static void	ft_sorted_four(t_stack *stack_a, t_stack *stack_b)
 {
 	ft_move_min_to_top(stack_a, 'a');
 	if (ft_check_sorted(stack_a))
@@ -47,7 +47,7 @@ void	ft_sorted_four(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	ft_sorted_five(t_stack *stack_a, t_stack *stack_b)
+static void	ft_sorted_five(t_stack *stack_a, t_stack *stack_b)
 {
 	ft_move_min_to_top(stack_a, 'a');
 	if (ft_check_sorted(stack_a))
