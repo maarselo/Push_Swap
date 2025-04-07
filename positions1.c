@@ -56,22 +56,6 @@ t_node	*ft_get_last_node(t_node *top)
 	return (tmp);
 }
 
-t_node	*ft_get_prev(t_node *node, t_stack *stack)
-{
-	t_node	*tmp;
-
-	tmp = stack->top;
-	if (tmp == node)
-		return (NULL);
-	while (tmp)
-	{
-		if (tmp->next == node)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
 int	ft_position(t_node *node, t_stack *stack)
 {
 	t_node	*tmp;
