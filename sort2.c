@@ -55,7 +55,7 @@ static void	ft_rotate_b_to_pusha_a(t_stack *stack_b)
 	max = ft_max(stack_b);
 	while (stack_b->top != max)
 	{
-		if (ft_position(max, stack_b) <= ft_check_size(stack_b))
+		if (ft_pos(max, stack_b) <= ft_size(stack_b))
 			ft_rotate(stack_b, 'b');
 		else
 			ft_reverse(stack_b, 'b');
