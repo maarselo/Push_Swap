@@ -28,11 +28,11 @@ Inspirado en el enfoque del artículo [“Push Swap” by Ayogun](https://medium
 ### 🔄 Etapas principales
 
 1. **Indexado**: Asigno un índice a cada número basado en su orden en la lista ordenada.
-2. **Reducir el stack_a**: Dejo el `stack_a` completmente vacío y paso todos los números con el movimiento `pushb` al `stack_b`.
+2. **Reducir el stack_a**: Dejo el `stack_a` completamente vacío y paso todos los números con el movimiento `pushb` al `stack_b`.
 3. **Reinserción desde stack_b**:
-   - Por cada número en `stack_b`, calculo el coste de insertarlo correctamente en `stack_a`.
-   - Aplico la rotación óptima combinada para minimizar movimientos (`rr`, `rrr`, etc.).
-4. **Rotar stack_a** para que el valor mínimo esté en la cima.
+   - Por cada número en `stack_b`, al estar de manera ascendente hago el movimiento `pusha` hacia el `stack_a`.
+   - Y al hacer este movimiento quedará todo en orden ascendente al inmediato.
+4. **Rotar stack_a** Y ni si quiera hara falta rotar el `stack a` porque ya quedara todo en orden.
 
 Esta estrategia permite reducir significativamente el número de operaciones necesarias, sobre todo para listas grandes.
 
