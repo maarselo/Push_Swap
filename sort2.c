@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static	t_node	*ft_find_cheapest_node(t_stack *stack_a, t_stack *stack_b )
+t_node	*ft_find_cheapest_node(t_stack *stack_a, t_stack *stack_b )
 {
 	t_node	*current;
 	t_node	*cheapest;
@@ -42,7 +42,7 @@ static void	ft_push_to_b(t_stack *stack_a, t_stack *stack_b, t_node *cheap)
 
 	cost_a = ft_costa(cheap, stack_a);
 	cost_b = ft_costb(cheap, stack_b);
-	ft_both_rot(stack_a, stack_b, cheap, &cost_a, &cost_b);
+	ft_both_rot(stack_a, stack_b, &cost_a, &cost_b);
 	ft_rotate_stack_a(stack_a, cheap, cost_a);
 	ft_rotate_stack_b(stack_b, cheap, cost_b);
 	ft_push(stack_a, stack_b, 'b');
