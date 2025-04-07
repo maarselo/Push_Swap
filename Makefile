@@ -13,7 +13,8 @@
 NAME = push_swap
 
 HEADER = push_swap.h
-SRCS = free.c positions.c create.c entry.c movements1.c movements2.c error.c sort1.c main.c operationsUtils.c utils.c sort2.c rotates.c
+SRCS = free.c positions1.c create.c entry.c movements1.c movements2.c error.c \
+		sort1.c main.c operationsUtils.c utils.c sort2.c positions2.c rotates.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR=./Libft
@@ -23,22 +24,34 @@ CC = cc -g
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
+GREEN = \033[1;32m
+BLUE = \033[1;34m
+YELLOW = \033[1;33m
+RED = \033[1;31m
+RESET = \033[0m
+
 all: $(NAME)
 
 $(LIBFT): 
-	make -C $(LIBFT_DIR)
-	make -C $(LIBFT_DIR) bonus
+	$(BANNER)
+	@echo "$(BLUE)->Compilando Libft...$(RESET)"
+	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) bonus
 
 $(NAME): $(OBJS) $(LIBFT) $(HEADER) Makefile
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	@echo "$(GREEN)✔ Compilando $(NAME)...$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	@echo "$(GREEN)	 Compilación completada!$(RESET)"
 
 clean :
-	make -C $(LIBFT_DIR) clean
-	$(RM) $(OBJS)
+	@echo "$(RED)  Limpiando objetos...$(RESET)"
+	@make -C $(LIBFT_DIR) clean
+	@$(RM) $(OBJS)
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
-	$(RM) $(NAME)
+	@echo "$(RED)  Borrando ejecutable...$(RESET)"
+	@make -C $(LIBFT_DIR) fclean
+	@$(RM) $(NAME)
 
 re: fclean all
 
