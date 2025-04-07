@@ -33,7 +33,6 @@ RESET = \033[0m
 all: $(NAME)
 
 $(LIBFT): 
-	$(BANNER)
 	@echo "$(BLUE)->Compilando Libft...$(RESET)"
 	@make -C $(LIBFT_DIR)
 	@make -C $(LIBFT_DIR) bonus
