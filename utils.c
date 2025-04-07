@@ -69,7 +69,7 @@ void	ft_print_stacks(t_stack *stack_a)
 {
 	t_node	*tmp;
 
-	tmp = stack->top;
+	tmp = stack_a->top;
 	while (tmp)
 	{
 		printf("%d\n", tmp->value);
