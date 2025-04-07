@@ -40,19 +40,19 @@ RM = rm -rf
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADER) Makefile
-	$(CC_LIB) $(NAME) $(OBJS)
+	@$(CC_LIB) $(NAME) $(OBJS)
 
 bonus: $(OBJS) $(BOBJS)
-	$(CC_LIB) $(NAME) $(BOBJS)
+	@$(CC_LIB) $(NAME) $(BOBJS)
 
 %.o:%.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	$(RM) $(OBJS) $(BOBJS)
+	@$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
