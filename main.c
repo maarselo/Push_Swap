@@ -12,30 +12,22 @@
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    int error;
-    char **numbers;
-    t_stack *stack_a;
-    t_stack *stack_b;
+	char	**numbers;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
-    if (argc < 2)
-        return (1);
-    numbers = ft_check_split(argv, argc);
-
-    error = ft_check_args(numbers);
-    if (error)
-        ft_error();
-    
-    stack_a = ft_create_stack();
-    stack_b = ft_create_stack();
-
-    ft_fill_stack(stack_a, numbers);
-    if (ft_check_sorted(stack_a))
-    {
-        ft_put_correct_index(stack_a);
-        ft_sort(stack_a, stack_b);
-    }
-    ft_free(argc, numbers, stack_a, stack_b);
-    return (0);
+	if (argc < 2)
+		return (1);
+	numbers = ft_check_split(argv, argc);
+	if (ft_check_args(numbers))
+		ft_error();
+	stack_a = ft_create_stack();
+	stack_b = ft_create_stack();
+	ft_fill_stack(stack_a, numbers);
+	if (ft_check_sorted(stack_a))
+		ft_sort(stack_a, stack_b);
+	ft_free(argc, numbers, stack_a, stack_b);
+	return (0);
 }
