@@ -28,7 +28,7 @@ Inspirado en el enfoque del artículo [“Push Swap” by Ayogun](https://medium
 ### 🔄 Etapas principales
 
 1. **Indexado**: Asigno un índice a cada número basado en su orden en la lista ordenada.
-2. **Reducir el stack_a**: Dejo en `stack_a` solo los elementos esenciales (como el mínimo, el máximo y uno intermedio) y paso el resto a `stack_b`.
+2. **Reducir el stack_a**: Dejo el `stack_a` completmente vacío y paso todos los números con el movimiento `pushb` `stack_b`.
 3. **Reinserción desde stack_b**:
    - Por cada número en `stack_b`, calculo el coste de insertarlo correctamente en `stack_a`.
    - Aplico la rotación óptima combinada para minimizar movimientos (`rr`, `rrr`, etc.).
