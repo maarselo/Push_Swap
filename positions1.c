@@ -56,7 +56,7 @@ t_node	*ft_get_last_node(t_node *top)
 	return (tmp);
 }
 
-int	ft_position(t_node *node, t_stack *stack)
+int	ft_pos(t_node *node, t_stack *stack)
 {
 	t_node	*tmp;
 	int		i;
