@@ -19,7 +19,7 @@ int	ft_abs(int num)
 	return (num);
 }
 
-int	ft_check_size(t_stack *stack)
+int	ft_size(t_stack *stack)
 {
 	if (stack->size % 2 != 0)
 		return ((stack->size / 2) + 1);
