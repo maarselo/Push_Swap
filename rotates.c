@@ -12,34 +12,47 @@
 
 #include "push_swap.h"
 
-void    ft_both_rot(t_stack *sta, t_stack *stb, t_node *cheap, int *a, int *b)
+static int	ft_should_rrr(t_stack *sa, t_stack *sb, t_node *cheap)
 {
-    while (*a > 0 && *b > 0)
-    {
-        if ((ft_position(cheap, sta) > ft_check_size(sta)) && \
-        (ft_position(ft_get_node_prev(cheap,stb),stb) > ft_check_size(stb)))
-        {
-            ft_rrr(sta, stb);
-            (*a)--;
-            (*b)--;
-        }
-        else if ((ft_position(cheap, sta) <= ft_check_size(sta)) && \
-        (ft_position(ft_get_node_prev(cheap,stb),stb) <= ft_check_size(stb)))
-        {
-            ft_rr(sta, stb);
-            (*a)--;
-            (*b)--;
-        }
-        else
-            break;
-    }
+	return (ft_pos(cheap, sa) > ft_size(sa)
+		&& ft_pos(ft_get_node_prev(cheap, sb), sb) > ft_size(sb));
+}
+
+static int	ft_should_rr(t_stack *sa, t_stack *sb, t_node *cheap)
+{
+	return (ft_pos(cheap, sa) <= ft_size(sa)
+		&& ft_pos(ft_get_node_prev(cheap, sb), sb) <= ft_size(sb));
+}
+
+void	ft_both_rot(t_stack *sa, t_stack *sb, int *a, int *b)
+{
+	t_node	*cheap;
+
+	cheap = ft_find_cheapest_node(sa, sb);
+	while (*a > 0 && *b > 0)
+	{
+		if (ft_should_rrr(sa, sb, cheap))
+		{
+			ft_rrr(sa, sb);
+			(*a)--;
+			(*b)--;
+		}
+		else if (ft_should_rr(sa, sb, cheap))
+		{
+			ft_rr(sa, sb);
+			(*a)--;
+			(*b)--;
+		}
+		else
+			break ;
+	}
 }
 
 void	ft_rotate_stack_a(t_stack *a, t_node *cheapest, int cost_a)
 {
 	while (cost_a > 0)
 	{
-		if (ft_position(cheapest, a) > ft_check_size(a))
+		if (ft_pos(cheapest, a) > ft_size(a))
 			ft_reverse(a, 'a');
 		else
 			ft_rotate(a, 'a');
@@ -51,7 +64,7 @@ void	ft_rotate_stack_b(t_stack *b, t_node *cheapest, int cost_b)
 {
 	while (cost_b > 0)
 	{
-		if (ft_position(ft_get_node_prev(cheapest, b), b) > ft_check_size(b))
+		if (ft_pos(ft_get_node_prev(cheapest, b), b) > ft_size(b))
 			ft_reverse(b, 'b');
 		else
 			ft_rotate(b, 'b');
@@ -59,3 +72,4 @@ void	ft_rotate_stack_b(t_stack *b, t_node *cheapest, int cost_b)
 	}
 }
 
+//////////////////
