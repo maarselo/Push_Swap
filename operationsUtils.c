@@ -30,7 +30,7 @@ int	ft_costa(t_node *node, t_stack *stack_a)
 {
 	int	cost_a;
 
-	cost_a = ft_position(node, stack_a) - 1;
+	cost_a = ft_pos(node, stack_a) - 1;
 	if (cost_a > stack_a->size / 2)
 		cost_a = stack_a->size - cost_a;
 	return (cost_a);
@@ -43,10 +43,10 @@ static int	ft_calculate_costmax_b(t_node *max, t_stack *stack_b)
 	cost_b = 0;
 	if (stack_b->top == max)
 		return (cost_b);
-	if (ft_position(max, stack_b) > ft_check_size(stack_b))
-		cost_b = stack_b->size - ft_position(max, stack_b) + 1;
+	if (ft_pos(max, stack_b) > ft_size(stack_b))
+		cost_b = stack_b->size - ft_pos(max, stack_b) + 1;
 	else
-		cost_b = ft_position(max, stack_b) - 1;
+		cost_b = ft_pos(max, stack_b) - 1;
 	return (cost_b);
 }
 
@@ -64,8 +64,8 @@ int	ft_costb(t_node *node, t_stack *stack_b)
 	else
 	{
 		min = ft_get_node_prev(node, stack_b);
-		if (ft_position(min, stack_b) > ft_check_size(stack_b))
-			cost_b = stack_b->size - ft_position(min, stack_b) + 1;
+		if (ft_pos(min, stack_b) > ft_size(stack_b))
+			cost_b = stack_b->size - ft_pos(min, stack_b) + 1;
 		else
 			cost_b = ft_position(min, stack_b) - 1;
 	}
