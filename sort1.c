@@ -60,6 +60,7 @@ static void	ft_sorted_five(t_stack *stack_a, t_stack *stack_b)
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
 {
+	ft_put_correct_index(stack_a);
 	if (stack_a->size == 2)
 		ft_swap(stack_a, 'a');
 	else if (stack_a->size == 3)
