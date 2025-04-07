@@ -12,65 +12,62 @@
 
 #include "push_swap.h"
 
-int   ft_abs(int num)
+int	ft_abs(int num)
 {
-    if (num < 0)
-        return (-num);
-    return (num);
+	if (num < 0)
+		return (-num);
+	return (num);
 }
 
-int ft_check_size(t_stack *stack)
+int	ft_check_size(t_stack *stack)
 {
-    if (stack->size % 2 != 0)
-        return ((stack->size / 2) +1);
-    return (stack->size / 2);
+	if (stack->size % 2 != 0)
+		return ((stack->size / 2) + 1);
+	return (stack->size / 2);
 }
 
-int ft_costa(t_node *node, t_stack *stack_a)
+int	ft_costa(t_node *node, t_stack *stack_a)
 {
-    int     cost_a;
+	int	cost_a;
 
-    cost_a = ft_position(node, stack_a) - 1;
-    if (cost_a > stack_a->size / 2)
-        cost_a = stack_a->size - cost_a;
-    return (cost_a);
+	cost_a = ft_position(node, stack_a) - 1;
+	if (cost_a > stack_a->size / 2)
+		cost_a = stack_a->size - cost_a;
+	return (cost_a);
 }
 
-int ft_costb(t_node *node, t_stack *stack_b)
+static int	ft_calculate_costmax_b(t_node *max, t_stack *stack_b)
 {
-    int cost_b;
-    t_node  *max;
-    t_node  *min;
-    t_node  *tmp;
+	int	cost_b;
 
-    cost_b = 0;
-    max = ft_max(stack_b);
-    min = ft_min(stack_b);
-    if ((node->index > max->index) || (node->index < min->index))
-    {
-        if (stack_b->top == max)
-            return (cost_b);
-        if (ft_position(max, stack_b) > ft_check_size(stack_b))
-            cost_b = stack_b->size - ft_position(max, stack_b) + 1;
-        else
-            cost_b = ft_position(max, stack_b) - 1;
-    }
-   else
-    {
-        tmp = stack_b->top;
-        min = NULL; 
-        while (tmp)
-        {
-            if ((tmp->value < node->value) && (!min || ft_abs(tmp->index - node->index) < ft_abs(min->index - node->index)))
-                min = tmp;
-            tmp = tmp->next;
-        }
-        if (ft_position(min,stack_b) > ft_check_size(stack_b)) 
-            cost_b = stack_b->size - ft_position(min,stack_b) + 1;
-        else
-            cost_b = ft_position(min,stack_b) - 1;
-        
-    }
-    return (cost_b);
+	cost_b = 0;
+	if (stack_b->top == max)
+		return (cost_b);
+	if (ft_position(max, stack_b) > ft_check_size(stack_b))
+		cost_b = stack_b->size - ft_position(max, stack_b) + 1;
+	else
+		cost_b = ft_position(max, stack_b) - 1;
+	return (cost_b);
 }
 
+int	ft_costb(t_node *node, t_stack *stack_b)
+{
+	t_node	*max;
+	t_node	*min;
+	int		cost_b;
+
+	cost_b = 0;
+	max = ft_max(stack_b);
+	min = ft_min(stack_b);
+	if ((node->index > max->index) || (node->index < min->index))
+		return (ft_calculate_costmax_b(max, stack_b));
+	else
+	{
+		min = ft_get_node_prev(node, stack_b);
+		if (ft_position(min, stack_b) > ft_check_size(stack_b))
+			cost_b = stack_b->size - ft_position(min, stack_b) + 1;
+		else
+			cost_b = ft_position(min, stack_b) - 1;
+	}
+	return (cost_b);
+}
