@@ -31,7 +31,7 @@ int	ft_check_sorted(t_stack *stack_a)
 
 void	ft_move_min_to_top(t_stack *stack, char stack_name)
 {
-	if (ft_position(ft_min(stack), stack) <= ft_check_size(stack))
+	if (ft_pos(ft_min(stack), stack) <= ft_size(stack))
 	{
 		while (stack->top != ft_min(stack))
 			ft_rotate(stack, stack_name);
