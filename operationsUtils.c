@@ -67,7 +67,7 @@ int	ft_costb(t_node *node, t_stack *stack_b)
 		if (ft_pos(min, stack_b) > ft_size(stack_b))
 			cost_b = stack_b->size - ft_pos(min, stack_b) + 1;
 		else
-			cost_b = ft_position(min, stack_b) - 1;
+			cost_b = ft_pos(min, stack_b) - 1;
 	}
 	return (cost_b);
 }
