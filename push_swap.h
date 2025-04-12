@@ -56,6 +56,7 @@ void	ft_rotate_stack_b(t_stack *b, t_node *cheapest, int cost_b);
 void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 void	ft_sorted_more(t_stack *stack_a, t_stack *stack_b);
 
+int		ft_atoi2(const char *str);
 int		ft_check_sorted(t_stack *stack_a);
 void	ft_move_min_to_top(t_stack *stack, char stack_name);
 void	ft_put_correct_index(t_stack *stack_a);
@@ -68,5 +69,4 @@ int		ft_costb( t_node *node, t_stack *stack_b);
 void	ft_error(void);
 void	ft_free(int argc, char **numbers, t_stack *stack_a, t_stack *stack_b);
 
-void	ft_print_stacks(t_stack *stack_a);
 #endif
