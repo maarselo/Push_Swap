@@ -11,7 +11,30 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
+int	ft_atoi2(const char *str)
+{
+	int					i;
+	int					sign;
+	long long int		num;
+
+	i = 0;
+	num = 0;
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (ft_isdigit(str[i]))
+		num = num * 10 + (str[i++] - '0');
+	if ((sign * num) > 2147483647 || (sign * num) < -2147483648)
+		ft_error();
+	return (num * sign);
+}
 
 int	ft_check_sorted(t_stack *stack_a)
 {
@@ -62,17 +85,5 @@ void	ft_put_correct_index(t_stack *stack_a)
 		}
 		current->index = index;
 		current = current->next;
-	}
-}
-
-void	ft_print_stacks(t_stack *stack_a)
-{
-	t_node	*tmp;
-
-	tmp = stack_a->top;
-	while (tmp)
-	{
-		printf("%d\n", tmp->value);
-		tmp = tmp->next;
 	}
 }
