@@ -62,7 +62,7 @@ void	ft_fill_stack(t_stack *stack_a, char **argv)
 	i = -1;
 	while (argv[++i])
 	{
-		ft_add_to_stack(stack_a, ft_atoi(argv[i]));
+		ft_add_to_stack(stack_a, ft_atoi2(argv[i]));
 		stack_a->size++;
 	}
 }
