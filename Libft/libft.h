@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# define BUFFER_SIZE 100 
+
 typedef struct s_list
 {
 	void			*content;
