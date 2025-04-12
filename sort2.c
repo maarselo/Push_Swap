@@ -66,8 +66,8 @@ void	ft_sorted_more(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*cheapest;
 
-	ft_push(stack_a, stack_b, 'a');
-	ft_push(stack_a, stack_b, 'a');
+	ft_push(stack_a, stack_b, 'b');
+	ft_push(stack_a, stack_b, 'b');
 	while (stack_a->size != 0)
 	{
 		cheapest = ft_find_cheapest_node(stack_a, stack_b);
@@ -75,9 +75,5 @@ void	ft_sorted_more(t_stack *stack_a, t_stack *stack_b)
 	}
 	ft_rotate_b_to_pusha_a(stack_b);
 	while (stack_b->size != 0)
-		ft_push(stack_b, stack_a, 'b');
-	if (ft_check_sorted(stack_a))
-		ft_putstr_fd("no esta ordenado.", 1);
-	else if (!ft_check_sorted(stack_a))
-		ft_putstr_fd("esta ordenado.", 1);
+		ft_push(stack_b, stack_a, 'a');
 }
