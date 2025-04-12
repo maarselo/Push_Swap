@@ -28,13 +28,15 @@ static int	ft_checkdup(char **argv)
 	int	i;
 	int	j;
 
+	if (argv[0] == NULL)
+		return (1);
 	i = 0;
 	while (argv[i])
 	{
 		j = i + 1;
 		while (argv[j])
 		{
-			if (!ft_strncmp(argv[i], argv[j], 11))
+			if (ft_atoi2(argv[i]) == ft_atoi2(argv[j]))
 				return (1);
 			j++;
 		}
