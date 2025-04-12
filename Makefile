@@ -11,11 +11,20 @@
 # **************************************************************************** #
 
 NAME = push_swap
+BNAME = checker
 
 HEADER = push_swap.h
+
 SRCS = free.c positions1.c create.c entry.c movements1.c movements2.c error.c \
-		sort1.c main.c operationsUtils.c utils.c sort2.c positions2.c rotates.c
+		main.c sort1.c operationsUtils.c utils.c sort2.c positions2.c rotates.c
 OBJS = $(SRCS:.c=.o)
+
+BHEADER = push_swap_bonus.h
+BSRCS= mainBonus.c movementsBonus1.c movementsBonus2.c \
+		free.c positions1.c create.c entry.c movements1.c movements2.c \
+		error.c sort1.c operationsUtils.c utils.c sort2.c positions2.c rotates.c 
+
+BOBJS = $(BSRCS:.c=.o)
 
 LIBFT_DIR=./Libft
 LIBFT=$(LIBFT_DIR)/libft.a
@@ -41,6 +50,13 @@ $(NAME): $(OBJS) $(LIBFT) $(HEADER) Makefile
 	@echo "$(GREEN)✔ Compilando $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 	@echo "$(GREEN)	 Compilación completada!$(RESET)"
+
+bonus : $(BNAME)
+
+$(BNAME): $(BOBJS) $(LIBFT) $(HEADER) $(BHEADER) Makefile
+	@echo "$(YELLOW)->Compilando el $(BNAME)...$(RESET)"
+	@$(CC) $(CFLAGS) $(BOBJS) -L$(LIBFT_DIR) -lft -o $(BNAME)
+	@echo "$(YELLOW) Compilación completada!$(RESET)"
 
 clean :
 	@echo "$(RED)  Limpiando objetos...$(RESET)"
