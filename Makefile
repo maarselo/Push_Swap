@@ -70,10 +70,12 @@ fclean: clean
 
 bonusClean: 
 	@echo "$(RED)  Limpiando objetos bonus...$(RESET)"
+	@make -C $(LIBFT_DIR) clean
 	@$(RM) $(BOBJS)
 
-bonusFclean: bonus_clean
+bonusFclean: bonusClean
 	@echo "$(RED)  Borrando checker bonus...$(RESET)"
+	@make -C $(LIBFT_DIR) fclean
 	@$(RM) $(BNAME)
 
 re: fclean all
