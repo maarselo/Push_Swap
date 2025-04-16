@@ -64,10 +64,18 @@ clean :
 	@$(RM) $(OBJS)
 
 fclean: clean
-	@echo "$(RED)  Borrando ejecutable...$(RESET)"
+	@echo "$(RED)  Borrando ejecutable ...$(RESET)"
 	@make -C $(LIBFT_DIR) fclean
 	@$(RM) $(NAME)
 
+bonusClean: 
+	@echo "$(RED)  Limpiando objetos bonus...$(RESET)"
+	@$(RM) $(BOBJS)
+
+bonusFclean: bonus_clean
+	@echo "$(RED)  Borrando checker bonus...$(RESET)"
+	@$(RM) $(BNAME)
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean bonusClean bonusFclean re 
